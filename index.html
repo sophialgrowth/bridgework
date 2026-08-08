@@ -60,7 +60,14 @@
       h1 { max-width: 680px; margin: 0; font-family: var(--serif); font-size: clamp(54px, 6.3vw, 88px); font-weight: 500; letter-spacing: 0; line-height: 0.93; }
       h1 em { color: var(--lime); font-style: normal; }
       .lede { max-width: 590px; margin: 27px 0 0; color: #c2cec6; font-size: 18px; }
-      .principles { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 44px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+      .event-shoutout { display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(170px, 0.8fr); align-items: stretch; max-width: 695px; margin-top: 29px; border: 1px solid var(--lime); background: var(--lime); color: #21150f; text-decoration: none; }
+      .event-shoutout:hover { background: #eea185; }
+      .event-shoutout-mark { display: grid; place-items: center; min-width: 69px; padding: 11px; border-right: 1px solid rgba(33, 21, 15, 0.35); font-family: var(--mono); font-size: 10px; font-weight: 900; letter-spacing: 0.08em; line-height: 1.18; text-align: center; text-transform: uppercase; }
+      .event-shoutout-main { padding: 13px 15px; }
+      .event-shoutout-main span { display: block; font-family: var(--mono); font-size: 10px; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; }
+      .event-shoutout-main strong { display: block; margin-top: 3px; font-family: var(--serif); font-size: 22px; font-weight: 600; line-height: 1; }
+      .event-shoutout-note { display: flex; align-items: center; padding: 13px 15px; border-left: 1px solid rgba(33, 21, 15, 0.35); font-size: 12px; font-weight: 750; line-height: 1.25; }
+      .principles { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 34px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
       .principle { min-height: 98px; padding: 17px 14px 15px 0; }
       .principle + .principle { padding-left: 14px; border-left: 1px solid var(--line); }
       .principle b { display: block; color: var(--lime); font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
@@ -173,6 +180,8 @@
         .pulse { font-size: 9px; }
         h1 { font-size: 52px; }
         .lede { font-size: 16px; }
+        .event-shoutout { grid-template-columns: auto 1fr; }
+        .event-shoutout-note { display: none; }
         .principles, .mission-grid { grid-template-columns: 1fr; }
         .principle, .principle + .principle { min-height: 0; padding: 13px 0; border-left: 0; }
         .principle + .principle { border-top: 1px solid var(--line); }
@@ -204,6 +213,7 @@
             <p class="eyebrow">Bridgework [our first vibe-coded experiment]</p>
             <h1 id="headline">Turn AI anxiety into <em>human momentum.</em></h1>
             <p class="lede">A mutual-aid network for the AI era: one signal becomes a real connection, a human-reviewed 48-hour action, and a lesson the whole community can use.</p>
+            <a class="event-shoutout" href="https://luma.com/claude-7lr5?tk=ScqFuE" target="_blank" rel="noreferrer" aria-label="Built live at San Francisco Claude Impact Lab. View the event."><span class="event-shoutout-mark">Made<br />live</span><span class="event-shoutout-main"><span>A Claude Community Event</span><strong>San Francisco<br />Claude Impact Lab</strong></span><span class="event-shoutout-note">We came with one question about AI. We left with a working bridge. -&gt;</span></a>
             <div class="principles" aria-label="The three goals Bridgework serves">
               <div class="principle"><b>01 Transition</b><span>Build confidence with one real work experiment.</span></div>
               <div class="principle"><b>02 Community</b><span>Give people a specific reason to help each other.</span></div>
@@ -267,7 +277,7 @@
         </section>
       </main>
 
-      <footer><div class="wrap footer-inner"><p><strong>Bridgework</strong> is a prototype for collective capability in the AI era, built live at the San Francisco Claude Impact Lab.</p><p>Human review is a feature. Consent is a default. Useful learning returns to the commons.</p></div></footer>
+      <footer><div class="wrap footer-inner"><p><strong>Bridgework</strong> is a prototype for collective capability in the AI era.</p><p>Human review is a feature. Consent is a default. Useful learning returns to the commons.</p></div></footer>
       <div class="toast" id="toast" role="status" aria-live="polite"></div>
     </div>
     <script>
