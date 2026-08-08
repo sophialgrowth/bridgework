@@ -1,0 +1,9 @@
+{
+  "name": "bridgework",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A social-first mutual-aid network for the AI transition.",
+  "scripts": {
+    "start": "node server.mjs"
+  }
+}

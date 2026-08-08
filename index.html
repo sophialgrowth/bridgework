@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#09110f" />
+    <meta name="description" content="Bridgework is our first vibe-coded experiment: turn an AI fear into a real human connection, a 48-hour action, and a lesson the whole community can use." />
+    <meta property="og:title" content="Bridgework | Our first vibe-coded experiment" />
+    <meta property="og:description" content="Turn AI anxiety into human momentum: one signal, one collaboration route, one action worth sharing." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>Bridgework | Our first vibe-coded experiment</title>
+    <style>
+      :root {
+        --ink: #f7f2e9;
+        --quiet: #b8ab9c;
+        --base: #1c1916;
+        --base-2: #2b2722;
+        --panel: rgba(42, 36, 30, 0.9);
+        --line: rgba(247, 242, 233, 0.18);
+        --lime: #d97757;
+        --coral: #efb194;
+        --blue: #b7d2bb;
+        --violet: #d9c3ad;
+        --white: #fff9f0;
+        --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        --serif: Iowan Old Style, Georgia, serif;
+      }
+
+      * { box-sizing: border-box; }
+      html { background: var(--base); scroll-behavior: smooth; }
+      body { min-width: 320px; margin: 0; background: var(--base); color: var(--ink); font-family: var(--sans); line-height: 1.45; }
+      button, input, textarea, select { font: inherit; }
+      button { cursor: pointer; }
+      button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; }
+      .atmosphere { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.65; }
+      .app { position: relative; overflow: hidden; }
+      .wrap { width: min(1220px, calc(100% - 48px)); margin: 0 auto; }
+
+      .topline { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 22px; border-bottom: 1px solid var(--line); }
+      .brand { display: inline-flex; align-items: center; gap: 12px; color: var(--ink); font-weight: 850; text-decoration: none; letter-spacing: 0; }
+      .brand-mark { position: relative; display: grid; grid-template-columns: repeat(2, 9px); grid-template-rows: repeat(2, 9px); gap: 3px; width: 21px; height: 21px; transform: rotate(45deg); }
+      .brand-mark span { background: var(--lime); }
+      .brand-mark span:nth-child(2) { background: var(--coral); }
+      .brand-mark span:nth-child(3) { background: var(--blue); }
+      .brand-mark span:nth-child(4) { background: var(--ink); }
+      .pulse { display: flex; align-items: center; gap: 8px; color: var(--quiet); font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; }
+      .pulse-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 16px var(--lime); }
+      .top-actions { display: flex; align-items: center; gap: 16px; }
+      .event-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 9px; border: 1px solid rgba(239, 177, 148, 0.52); color: var(--ink); font-family: var(--mono); font-size: 10px; font-weight: 800; letter-spacing: 0.03em; text-decoration: none; }
+      .event-badge:hover { border-color: var(--lime); color: var(--lime); }
+      .event-badge small { color: var(--coral); font-size: 9px; text-transform: uppercase; }
+      .text-action { border: 0; padding: 0; background: transparent; color: var(--quiet); font-size: 13px; font-weight: 750; }
+      .text-action:hover { color: var(--lime); }
+
+      .stage { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(390px, 0.92fr); gap: 76px; padding: 76px 0 62px; align-items: center; }
+      .eyebrow { display: flex; align-items: center; gap: 10px; margin: 0 0 17px; color: var(--lime); font-family: var(--mono); font-size: 11px; font-weight: 800; letter-spacing: 0.11em; text-transform: uppercase; }
+      .eyebrow::before { width: 30px; height: 1px; background: currentColor; content: ""; }
+      h1 { max-width: 680px; margin: 0; font-family: var(--serif); font-size: clamp(54px, 6.3vw, 88px); font-weight: 500; letter-spacing: 0; line-height: 0.93; }
+      h1 em { color: var(--lime); font-style: normal; }
+      .lede { max-width: 590px; margin: 27px 0 0; color: #c2cec6; font-size: 18px; }
+      .principles { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 44px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+      .principle { min-height: 98px; padding: 17px 14px 15px 0; }
+      .principle + .principle { padding-left: 14px; border-left: 1px solid var(--line); }
+      .principle b { display: block; color: var(--lime); font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
+      .principle span { display: block; margin-top: 7px; color: #dfe8df; font-size: 13px; font-weight: 700; line-height: 1.28; }
+
+      .composer { position: relative; border: 1px solid rgba(215, 255, 95, 0.38); background: var(--panel); box-shadow: 0 0 0 8px rgba(215, 255, 95, 0.035), 0 28px 90px rgba(0, 0, 0, 0.26); backdrop-filter: blur(14px); }
+      .composer-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 21px; border-bottom: 1px solid var(--line); }
+      .composer-title { margin: 0; font-size: 14px; font-weight: 850; }
+      .composer-id { color: var(--quiet); font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; }
+      .intent { display: grid; grid-template-columns: 1fr 1fr; padding: 17px 21px 0; gap: 7px; }
+      .intent button { min-height: 42px; border: 1px solid var(--line); background: transparent; color: var(--quiet); font-size: 13px; font-weight: 800; }
+      .intent button.active { border-color: var(--lime); background: var(--lime); color: #10180f; }
+      .composer-main { padding: 20px 21px 22px; }
+      .field-label { display: block; margin-bottom: 8px; color: #dbe7dd; font-size: 12px; font-weight: 800; }
+      textarea, input { width: 100%; border: 1px solid var(--line); border-radius: 0; background: rgba(7, 15, 13, 0.65); color: var(--white); }
+      textarea { min-height: 110px; padding: 13px; resize: vertical; line-height: 1.42; }
+      textarea::placeholder, input::placeholder { color: #76867b; }
+      .signal-metadata { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+      .field-label select { width: 100%; height: 42px; margin-top: 8px; padding: 0 9px; border: 1px solid var(--line); background: #111e19; color: var(--ink); }
+      .focus-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px; }
+      .focus-chip { border: 1px solid var(--line); background: transparent; color: #c2d1c6; padding: 7px 9px; font-family: var(--mono); font-size: 11px; }
+      .focus-chip.active, .focus-chip:hover { border-color: var(--blue); color: var(--blue); }
+      .signal-actions { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 22px; }
+      .primary { min-height: 46px; border: 0; border-radius: 0; padding: 0 17px; background: var(--lime); color: #111a0e; font-size: 13px; font-weight: 900; letter-spacing: 0.01em; }
+      .primary:hover { background: #e4ff91; }
+      .sample { border: 0; background: transparent; color: var(--blue); font-size: 12px; font-weight: 800; text-decoration: underline; }
+      .data-note { margin: 14px 0 0; color: #819088; font-size: 11px; }
+
+      .live-bar { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--quiet); font-family: var(--mono); font-size: 11px; overflow: hidden; white-space: nowrap; }
+      .live-bar strong { color: var(--coral); }
+      .live-bar span { color: var(--line); }
+
+      .route { display: none; margin: 0 auto; padding: 58px 0 74px; }
+      .route.show { display: block; animation: lift 0.45s ease both; }
+      @keyframes lift { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+      .route-head { display: flex; justify-content: space-between; gap: 24px; align-items: end; margin-bottom: 21px; }
+      .route-head h2 { max-width: 640px; margin: 0; font-family: var(--serif); font-size: clamp(36px, 4vw, 57px); font-weight: 500; line-height: 0.98; }
+      .route-head p { max-width: 330px; margin: 0; color: var(--quiet); font-size: 14px; }
+      .route-panel { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); background: rgba(14, 26, 22, 0.8); }
+      .match-panel { padding: 29px; border-right: 1px solid var(--line); }
+      .match-kicker { display: inline-block; padding: 4px 8px; background: var(--coral); color: #2a100c; font-family: var(--mono); font-size: 10px; font-weight: 900; letter-spacing: 0.07em; text-transform: uppercase; }
+      .match-person { display: flex; align-items: center; gap: 13px; margin-top: 21px; }
+      .avatar { display: grid; width: 48px; height: 48px; place-items: center; background: var(--blue); color: #102027; font-family: var(--serif); font-size: 23px; }
+      .match-person h3 { margin: 0; font-size: 20px; }
+      .match-person p { margin: 2px 0 0; color: var(--quiet); font-size: 13px; }
+      .match-copy { max-width: 470px; margin: 22px 0 0; color: #d7e3d9; }
+      .match-copy strong { color: var(--lime); }
+      .match-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+      .secondary { min-height: 42px; border: 1px solid var(--line); border-radius: 0; padding: 0 13px; background: transparent; color: var(--ink); font-size: 12px; font-weight: 800; }
+      .secondary:hover { border-color: var(--blue); color: var(--blue); }
+      .helper-status { min-height: 21px; margin: 13px 0 0; color: var(--lime); font-size: 12px; font-weight: 750; }
+      .path-panel { padding: 29px; background: #f6ede1; color: #271f18; }
+      .path-panel h3 { margin: 0; font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
+      .path-panel ol { margin: 20px 0 0; padding-left: 22px; }
+      .path-panel li { padding: 0 0 17px 5px; }
+      .path-panel li:last-child { padding-bottom: 0; }
+      .path-panel li::marker { color: #a65239; font-weight: 900; }
+      .path-panel strong { display: block; font-size: 15px; }
+      .path-panel span { display: block; margin-top: 3px; color: #695c51; font-size: 13px; }
+      .share-card { display: grid; grid-template-columns: minmax(0, 1fr) 174px; gap: 24px; align-items: center; margin-top: 18px; padding: 22px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+      .share-card h3 { margin: 0; font-size: 16px; }
+      .share-card p { max-width: 620px; margin: 6px 0 0; color: var(--quiet); font-size: 13px; }
+      .share-card .match-actions { margin-top: 15px; }
+      #share-canvas { width: 174px; height: 114px; border: 1px solid rgba(215, 255, 95, 0.5); }
+
+      .mission-section { padding: 70px 0; }
+      .section-head { display: flex; justify-content: space-between; gap: 24px; align-items: end; margin-bottom: 25px; }
+      .section-head h2 { margin: 0; font-family: var(--serif); font-size: clamp(32px, 4vw, 52px); font-weight: 500; line-height: 1; }
+      .section-head p { max-width: 370px; margin: 0; color: var(--quiet); font-size: 14px; }
+      .mission-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
+      .mission { min-height: 286px; padding: 23px 22px 20px 0; display: flex; flex-direction: column; }
+      .mission + .mission { padding-left: 22px; border-left: 1px solid var(--line); }
+      .mission:nth-child(2) { border-color: rgba(255, 120, 90, 0.55); }
+      .mission:nth-child(3) { border-color: rgba(136, 220, 255, 0.55); }
+      .mission-type { color: var(--lime); font-family: var(--mono); font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+      .mission h3 { margin: 14px 0 0; font-size: 20px; line-height: 1.1; }
+      .mission p { margin: 12px 0 0; color: var(--quiet); font-size: 13px; }
+      .mission-bottom { display: flex; align-items: center; justify-content: space-between; gap: 11px; margin-top: auto; padding-top: 20px; }
+      .mission-meta { color: #c4d0c7; font-family: var(--mono); font-size: 10px; }
+      .join { border: 0; border-bottom: 1px solid var(--lime); padding: 0 0 3px; background: transparent; color: var(--lime); font-size: 12px; font-weight: 850; }
+      .join.joined { color: var(--blue); border-color: var(--blue); }
+
+      .agent-zone { display: grid; grid-template-columns: minmax(260px, 0.78fr) minmax(0, 1.22fr); gap: 0; border: 1px solid rgba(136, 220, 255, 0.36); background: rgba(10, 25, 26, 0.82); }
+      .agent-intro { padding: 31px; border-right: 1px solid rgba(136, 220, 255, 0.26); }
+      .agent-intro .eyebrow { color: var(--blue); }
+      .agent-intro h2 { margin: 0; font-family: var(--serif); font-size: 43px; font-weight: 500; line-height: 0.96; }
+      .agent-intro p { margin: 17px 0 0; color: var(--quiet); font-size: 14px; }
+      .agent-contract { padding: 30px; }
+      .contract-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+      .contract-head h3 { margin: 0; font-family: var(--mono); font-size: 11px; letter-spacing: 0.09em; text-transform: uppercase; }
+      .contract-state { color: var(--blue); font-family: var(--mono); font-size: 10px; }
+      pre { max-height: 236px; margin: 18px 0 0; overflow: auto; border: 1px solid rgba(136, 220, 255, 0.25); padding: 15px; background: #071214; color: #c8ecfa; font-family: var(--mono); font-size: 11px; line-height: 1.55; white-space: pre-wrap; }
+      .contract-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+
+      footer { margin-top: 72px; border-top: 1px solid var(--line); }
+      .footer-inner { display: flex; justify-content: space-between; gap: 20px; padding: 20px 0 30px; color: var(--quiet); font-size: 12px; }
+      .footer-inner strong { color: var(--ink); }
+      .toast { position: fixed; z-index: 4; right: 24px; bottom: 24px; max-width: 340px; padding: 14px 16px; border: 1px solid var(--lime); background: #18271d; color: var(--ink); box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28); font-size: 13px; font-weight: 750; opacity: 0; pointer-events: none; transform: translateY(10px); transition: opacity 0.2s ease, transform 0.2s ease; }
+      .toast.show { opacity: 1; transform: translateY(0); }
+
+      @media (max-width: 900px) {
+        .stage { grid-template-columns: 1fr; gap: 45px; padding-top: 55px; }
+        .route-panel, .agent-zone { grid-template-columns: 1fr; }
+        .match-panel, .agent-intro { border-right: 0; border-bottom: 1px solid var(--line); }
+      }
+      @media (max-width: 680px) {
+        .wrap { width: min(calc(100% - 28px), 1220px); }
+        .topline { min-height: 61px; }
+        .top-actions .text-action, .event-badge small { display: none; }
+        .pulse { font-size: 9px; }
+        h1 { font-size: 52px; }
+        .lede { font-size: 16px; }
+        .principles, .mission-grid { grid-template-columns: 1fr; }
+        .principle, .principle + .principle { min-height: 0; padding: 13px 0; border-left: 0; }
+        .principle + .principle { border-top: 1px solid var(--line); }
+        .signal-metadata { grid-template-columns: 1fr; gap: 8px; }
+        .route-head, .section-head { display: block; }
+        .route-head p, .section-head p { margin-top: 13px; }
+        .match-panel, .path-panel, .agent-intro, .agent-contract { padding: 23px 18px; }
+        .share-card { grid-template-columns: 1fr; }
+        #share-canvas { width: 100%; height: auto; aspect-ratio: 1.53; }
+        .mission { min-height: 0; padding: 22px 0; border-bottom: 1px solid var(--line); }
+        .mission + .mission { padding-left: 0; border-left: 0; }
+        .footer-inner { display: block; }
+        .footer-inner p + p { margin-top: 8px; }
+      }
+      @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.001ms !important; scroll-behavior: auto !important; transition-duration: 0.001ms !important; } }
+    </style>
+  </head>
+  <body>
+    <canvas id="atmosphere" class="atmosphere" aria-hidden="true"></canvas>
+    <div class="app">
+      <header class="wrap topline">
+        <a href="#top" class="brand" aria-label="Bridgework home"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>BRIDGEWORK</a>
+        <div class="top-actions"><a class="event-badge" href="https://luma.com/claude-7lr5?tk=ScqFuE" target="_blank" rel="noreferrer"><small>Built at</small><span>SF Claude Impact Lab</span><span aria-hidden="true">-&gt;</span></a><span class="pulse"><span class="pulse-dot"></span><span id="network-count">2,418</span> people in the network</span><button class="text-action" id="jump-agent" type="button">Agent protocol</button></div>
+      </header>
+
+      <main id="top">
+        <section class="wrap stage" aria-labelledby="headline">
+          <div>
+            <p class="eyebrow">Bridgework [our first vibe-coded experiment]</p>
+            <h1 id="headline">Turn AI anxiety into <em>human momentum.</em></h1>
+            <p class="lede">A mutual-aid network for the AI era: one signal becomes a real connection, a human-reviewed 48-hour action, and a lesson the whole community can use.</p>
+            <div class="principles" aria-label="The three goals Bridgework serves">
+              <div class="principle"><b>01 Transition</b><span>Build confidence with one real work experiment.</span></div>
+              <div class="principle"><b>02 Community</b><span>Give people a specific reason to help each other.</span></div>
+              <div class="principle"><b>03 Access</b><span>Keep tools and decisions understandable to everyone.</span></div>
+            </div>
+          </div>
+
+          <section class="composer" aria-labelledby="composer-title">
+            <div class="composer-top"><h2 class="composer-title" id="composer-title">Broadcast a signal</h2><span class="composer-id">OPEN / LOCAL / HUMAN-REVIEWED</span></div>
+            <div class="intent" role="group" aria-label="Signal type"><button class="active" data-intent="need" type="button" aria-pressed="true">I need a bridge</button><button data-intent="offer" type="button" aria-pressed="false">I can build a bridge</button></div>
+            <form id="signal-form" class="composer-main">
+              <label class="field-label" for="signal" id="signal-label">What are you trying to make possible?</label>
+              <textarea id="signal" required placeholder="Example: I lead customer support. I want to test AI triage without making customers feel processed."></textarea>
+              <div class="signal-metadata">
+                <label class="field-label" for="context">Your context<select id="context"><option>Work / career</option><option>Learning / school</option><option>Neighborhood / care</option><option>Creative practice</option></select></label>
+                <label class="field-label" for="format">Best next step<select id="format"><option>15 minute conversation</option><option>Async co-working</option><option>Small group experiment</option></select></label>
+              </div>
+              <div class="focus-row" aria-label="Focus area"><button class="focus-chip active" data-focus="human judgment" type="button">human judgment</button><button class="focus-chip" data-focus="AI literacy" type="button">AI literacy</button><button class="focus-chip" data-focus="career pathway" type="button">career pathway</button><button class="focus-chip" data-focus="local care" type="button">local care</button></div>
+              <div class="signal-actions"><button class="primary" type="submit">Generate a collaboration route</button><button class="sample" id="sample" type="button">Load a live scenario</button></div>
+              <p class="data-note">Signals are designed for consent-based introductions. Do not include personal, client, or confidential information.</p>
+            </form>
+          </section>
+        </section>
+
+        <div class="wrap live-bar" aria-label="Network activity"><strong>LIVE SIGNALS</strong><span>/</span><span>Jae is looking for an AI study partner</span><span>/</span><span>Fiona offered a resume review</span><span>/</span><span>3 small experiments completed today</span></div>
+
+        <section class="wrap route" id="route" aria-live="polite" aria-labelledby="route-title">
+          <div class="route-head"><h2 id="route-title">A route designed to travel through people.</h2><p>Every connection is scoped to a small action, keeps a human review point, and asks for one useful learning back.</p></div>
+          <div class="route-panel">
+            <article class="match-panel">
+              <span class="match-kicker" id="match-kicker">Guide profile to seek</span>
+              <div class="match-person"><div class="avatar" id="avatar">M</div><div><h3 id="match-name">Maya R.</h3><p id="match-role">Community educator and AI learning facilitator</p></div></div>
+              <p class="match-copy" id="match-copy"><strong>Why this is a fit:</strong> Maya helps nontechnical teams try AI workflows while protecting empathy, judgment, and accountability.</p>
+              <div class="match-actions"><button class="primary" id="draft-intro" type="button">Draft a respectful introduction</button><button class="secondary" id="next-match" type="button">Show another route lens</button></div>
+              <p class="helper-status" id="match-status" role="status"></p>
+            </article>
+            <aside class="path-panel" aria-labelledby="path-title"><h3 id="path-title">The 48-hour route</h3><ol id="route-steps"><li><strong>Bring one real task</strong><span>Choose a support task with an obvious human-review moment.</span></li><li><strong>Run a small test together</strong><span>Use AI for a draft; keep the final decision with a person.</span></li><li><strong>Return one learning</strong><span>Share a prompt, boundary, or result the network can reuse.</span></li></ol></aside>
+          </div>
+          <section class="share-card" aria-labelledby="share-title"><div><h3 id="share-title">Make the action visible, not performative.</h3><p>Share a small commitment card to invite a collaborator. The invitation gives credit to the human help behind the experiment and makes the next ask easy.</p><div class="match-actions"><button class="secondary" id="share" type="button">Share my action card</button><button class="secondary" id="copy-card" type="button">Copy card text</button></div></div><canvas id="share-canvas" width="348" height="228" aria-label="Preview of your shareable action card"></canvas></section>
+        </section>
+
+        <section class="wrap mission-section" aria-labelledby="missions-title">
+          <div class="section-head"><div><p class="eyebrow">Open fieldwork</p><h2 id="missions-title">Missions that need more than one kind of mind.</h2></div><p>Join as a neighbor, practitioner, learner, or agent. Each mission has a clear contribution, an accountability point, and a public benefit.</p></div>
+          <div class="mission-grid">
+            <article class="mission"><span class="mission-type">Transition / 04</span><h3>Human-first support workflows</h3><p>Collect examples of customer-support work where AI saves time without outsourcing empathy or responsibility.</p><div class="mission-bottom"><span class="mission-meta">6 people + 2 agents</span><button class="join" type="button">Join mission</button></div></article>
+            <article class="mission"><span class="mission-type">Community / 11</span><h3>Teach one useful thing this week</h3><p>Pair AI-confident and AI-curious people for a short, no-jargon learning exchange.</p><div class="mission-bottom"><span class="mission-meta">18 people + 1 agent</span><button class="join" type="button">Join mission</button></div></article>
+            <article class="mission"><span class="mission-type">Access / 07</span><h3>Translate the systems that affect us</h3><p>Turn an opaque policy, form, or AI workflow into a plain-language guide with a human reviewer.</p><div class="mission-bottom"><span class="mission-meta">9 people + 3 agents</span><button class="join" type="button">Join mission</button></div></article>
+          </div>
+        </section>
+
+        <section class="wrap agent-zone" id="agents" aria-labelledby="agent-title">
+          <div class="agent-intro"><p class="eyebrow">Agent-friendly by design</p><h2 id="agent-title">Useful agents need a social contract.</h2><p>Every mission exposes a bounded goal, available context, human decision rights, safety limits, and an acceptance test. Agents help coordinate; people retain authorship.</p></div>
+          <div class="agent-contract"><div class="contract-head"><h3>Mission packet / machine readable</h3><span class="contract-state">READY FOR CONTRIBUTION</span></div><pre id="agent-json">{
+  "mission": "Human-first support workflows",
+  "goal": "Find one AI-assisted support task that preserves empathy and accountability.",
+  "agent_role": "Synthesize examples; never send customer-facing content.",
+  "human_decision_rights": ["approve experiment", "review output", "publish learning"],
+  "safety": ["no private data", "cite sources", "flag uncertainty"],
+  "success": "A reusable workflow with a named human-review step."
+}</pre><div class="contract-actions"><button class="secondary" id="copy-protocol" type="button">Copy agent packet</button><button class="secondary" id="contribute-agent" type="button">Propose an agent contribution</button><p class="helper-status" id="agent-status" role="status"></p></div></div>
+        </section>
+      </main>
+
+      <footer><div class="wrap footer-inner"><p><strong>Bridgework</strong> is a prototype for collective capability in the AI era, built live at the San Francisco Claude Impact Lab.</p><p>Human review is a feature. Consent is a default. Useful learning returns to the commons.</p></div></footer>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+    <script>
+      const form = document.querySelector('#signal-form');
+      const signal = document.querySelector('#signal');
+      const context = document.querySelector('#context');
+      const format = document.querySelector('#format');
+      const route = document.querySelector('#route');
+      const toast = document.querySelector('#toast');
+      const intentButtons = [...document.querySelectorAll('[data-intent]')];
+      const focusButtons = [...document.querySelectorAll('[data-focus]')];
+      let intent = 'need';
+      let focus = 'human judgment';
+      let peerIndex = 0;
+      let generatedRoute = null;
+      let toastTimer;
+      const peers = [
+        { name: 'Maya R.', initial: 'M', role: 'Community educator and AI learning facilitator', copy: 'Maya helps nontechnical teams try AI workflows while protecting empathy, judgment, and accountability.' },
+        { name: 'Jon B.', initial: 'J', role: 'Operations lead and peer mentor', copy: 'Jon runs small, evidence-based AI experiments with teams and knows how to set a human review point.' },
+        { name: 'Priya S.', initial: 'P', role: 'Career coach and accessibility advocate', copy: 'Priya translates unfamiliar tools into practical language and helps people surface the strengths they already bring.' }
+      ];
+
+      function notify(message) { clearTimeout(toastTimer); toast.textContent = message; toast.classList.add('show'); toastTimer = setTimeout(() => toast.classList.remove('show'), 3800); }
+      function displayName() { return peers[peerIndex % peers.length]; }
+      function drawShareCard() {
+        const canvas = document.querySelector('#share-canvas');
+        const ctx = canvas.getContext('2d');
+        const scale = window.devicePixelRatio || 1;
+        const width = canvas.clientWidth || 174;
+        const height = canvas.clientHeight || 114;
+        canvas.width = Math.round(width * scale); canvas.height = Math.round(height * scale); ctx.scale(scale, scale);
+        ctx.fillStyle = '#10211c'; ctx.fillRect(0, 0, width, height);
+        ctx.fillStyle = '#d7ff5f'; ctx.fillRect(0, 0, width, 4);
+        ctx.strokeStyle = 'rgba(136, 220, 255, .65)'; ctx.lineWidth = 1;
+        [[width * .75, height * .28, 22], [width * .82, height * .58, 11], [width * .62, height * .68, 14]].forEach(([x,y,r]) => { ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.stroke(); });
+        ctx.strokeStyle = 'rgba(215,255,95,.75)'; ctx.beginPath(); ctx.moveTo(width*.3,height*.22); ctx.lineTo(width*.76,height*.28); ctx.lineTo(width*.82,height*.58); ctx.lineTo(width*.62,height*.68); ctx.stroke();
+        ctx.fillStyle = '#d7ff5f'; ctx.font = '700 9px ui-monospace, monospace'; ctx.fillText('BRIDGEWORK / 48H ACTION', 12, 22);
+        ctx.fillStyle = '#f7fbf5'; ctx.font = '600 16px Georgia, serif'; ctx.fillText(intent === 'need' ? 'I am learning' : 'I am offering', 12, 48);
+        ctx.fillText(focus, 12, 69);
+        ctx.fillStyle = '#9faea5'; ctx.font = '11px ui-sans-serif, system-ui'; ctx.fillText('One useful human connection.', 12, height - 15);
+      }
+      function updatePeer() {
+        const peer = displayName();
+        document.querySelector('#match-name').textContent = peer.name;
+        document.querySelector('#avatar').textContent = peer.initial;
+        document.querySelector('#match-role').textContent = peer.role;
+        setMatchCopy(peer.copy);
+        document.querySelector('#match-kicker').textContent = intent === 'need' ? 'Guide profile to seek' : 'Learner profile to seek';
+      }
+      function setMatchCopy(copy) {
+        const target = document.querySelector('#match-copy');
+        const label = document.createElement('strong');
+        label.textContent = 'Why this is a fit:';
+        target.replaceChildren(label, document.createTextNode(' ' + copy));
+      }
+      function renderSteps(steps) {
+        const list = document.querySelector('#route-steps');
+        list.replaceChildren(...steps.map(step => {
+          const item = document.createElement('li');
+          const title = document.createElement('strong');
+          const detail = document.createElement('span');
+          title.textContent = step.title;
+          detail.textContent = step.detail;
+          item.append(title, detail);
+          return item;
+        }));
+      }
+      function updateRoute() {
+        const request = signal.value.trim() || 'your next AI experiment';
+        const lens = context.value.toLowerCase();
+        renderSteps([
+          { title: `Choose one real ${lens} moment`, detail: `Start with: "${request.slice(0, 92)}${request.length > 92 ? '...' : ''}"` },
+          { title: `Meet for ${format.value.toLowerCase()}`, detail: `Use ${focus} as the design lens. Keep a person responsible for the final decision.` },
+          { title: 'Return one learning to the network', detail: 'Share a prompt, boundary, or result another person can use without starting from zero.' }
+        ]);
+        drawShareCard();
+      }
+      function applyClaudeRoute(routeData) {
+        generatedRoute = routeData;
+        document.querySelector('#route-title').textContent = routeData.headline;
+        document.querySelector('#match-kicker').textContent = intent === 'need' ? 'Guide profile to seek' : 'Learner profile to seek';
+        document.querySelector('#match-name').textContent = routeData.guide.label;
+        document.querySelector('#avatar').textContent = routeData.guide.label.slice(0, 1).toUpperCase();
+        document.querySelector('#match-role').textContent = routeData.guide.description;
+        setMatchCopy(routeData.reason);
+        renderSteps(routeData.steps);
+        document.querySelector('#agent-json').textContent = JSON.stringify(routeData.agentPacket, null, 2);
+        drawShareCard();
+      }
+      function setIntent(next) {
+        intent = next;
+        intentButtons.forEach(button => { const active = button.dataset.intent === intent; button.classList.toggle('active', active); button.setAttribute('aria-pressed', active); });
+        document.querySelector('#signal-label').textContent = intent === 'need' ? 'What are you trying to make possible?' : 'What useful support can you offer?';
+        signal.placeholder = intent === 'need' ? 'Example: I lead customer support. I want to test AI triage without making customers feel processed.' : 'Example: I can help a small team turn scattered AI research into a clear brief with sources and human review.';
+      }
+      async function copy(text, success) { try { await navigator.clipboard.writeText(text); notify(success); } catch { notify('Select the text manually and copy it from your browser.'); } }
+
+      intentButtons.forEach(button => button.addEventListener('click', () => setIntent(button.dataset.intent)));
+      focusButtons.forEach(button => button.addEventListener('click', () => { focus = button.dataset.focus; focusButtons.forEach(chip => chip.classList.toggle('active', chip === button)); }));
+      document.querySelector('#sample').addEventListener('click', () => { setIntent('need'); signal.value = 'I lead customer support. I want to test AI triage, but I need every customer response to preserve empathy, context, and human accountability.'; context.value = 'Work / career'; format.value = '15 minute conversation'; focus = 'human judgment'; focusButtons.forEach(chip => chip.classList.toggle('active', chip.dataset.focus === focus)); signal.focus(); });
+      form.addEventListener('submit', async event => {
+        event.preventDefault(); peerIndex = 0; generatedRoute = null; updatePeer(); updateRoute(); document.querySelector('#match-status').textContent = ''; route.classList.add('show'); route.scrollIntoView({behavior: 'smooth', block: 'start'});
+        const submit = form.querySelector('.primary'); const original = submit.textContent; submit.disabled = true; submit.textContent = 'Mapping your route with Claude...';
+        try {
+          const response = await fetch('/api/route', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ intent, signal: signal.value, context: context.value, format: format.value, focus }) });
+          const data = await response.json();
+          if (!response.ok || !data.ok) throw new Error(data.error || 'Claude is unavailable.');
+          applyClaudeRoute(data.route); notify('Claude shaped a route. A person still owns every decision.');
+        } catch (error) { notify('Local route shown. Add your Claude key to enable personalized guidance.'); }
+        finally { submit.disabled = false; submit.textContent = original; }
+      });
+      document.querySelector('#next-match').addEventListener('click', () => { peerIndex += 1; generatedRoute = null; document.querySelector('#route-title').textContent = 'A route designed to travel through people.'; updatePeer(); updateRoute(); document.querySelector('#match-status').textContent = 'Another route lens is ready for the same signal.'; });
+      document.querySelector('#draft-intro').addEventListener('click', () => { const guide = generatedRoute?.guide.label || displayName().name; const intro = `Hi, I am reaching out through Bridgework. I am exploring: ${signal.value || 'an AI transition question'}. I am looking for someone with experience like ${guide} to identify one practical experiment with a human review step. Would a ${format.value.toLowerCase()} work?`; copy(intro, 'Introduction copied. Edit it before you send it.'); });
+      document.querySelector('#copy-card').addEventListener('click', () => copy(generatedRoute?.shareText || `I am taking one 48-hour Bridgework action around ${focus}: ${signal.value || 'a human-first AI experiment'}. I am looking for one person to make the learning better with. Built at SF Claude Impact Lab.`, 'Action card text copied.'));
+      document.querySelector('#share').addEventListener('click', async () => { const data = { title: 'My Bridgework action | SF Claude Impact Lab', text: `I am taking one 48-hour Bridgework action around ${focus}. Join me in making the AI shift more human. Built at SF Claude Impact Lab.`, url: location.href }; if (navigator.share) { try { await navigator.share(data); } catch {} } else { await copy(data.text + ' ' + data.url, 'Action card link copied for sharing.'); } });
+      document.querySelectorAll('.join').forEach(button => button.addEventListener('click', () => { if (!button.classList.contains('joined')) { button.classList.add('joined'); button.textContent = 'You are in'; const count = document.querySelector('#network-count'); count.textContent = (Number(count.textContent.replace(',','')) + 1).toLocaleString(); notify('You joined a mission. Your contribution can be small and still matter.'); } }));
+      document.querySelector('#copy-protocol').addEventListener('click', () => copy(document.querySelector('#agent-json').textContent, 'Machine-readable mission packet copied.'));
+      document.querySelector('#contribute-agent').addEventListener('click', () => { document.querySelector('#agent-status').textContent = 'Contribution route opened: propose evidence, a bounded workflow, and a human acceptance check.'; notify('Agent proposal guidance is ready.'); });
+      document.querySelector('#jump-agent').addEventListener('click', () => document.querySelector('#agents').scrollIntoView({behavior: 'smooth'}));
+      window.addEventListener('resize', drawShareCard); drawShareCard();
+
+      const canvas = document.querySelector('#atmosphere'); const ctx = canvas.getContext('2d'); let points = []; let animation; const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function setupField() { const ratio = Math.min(devicePixelRatio || 1, 2); canvas.width = innerWidth * ratio; canvas.height = innerHeight * ratio; canvas.style.width = innerWidth + 'px'; canvas.style.height = innerHeight + 'px'; ctx.setTransform(ratio, 0, 0, ratio, 0, 0); points = Array.from({length: Math.max(20, Math.floor(innerWidth / 70))}, (_, i) => ({ x: Math.random()*innerWidth, y: Math.random()*innerHeight, vx: (Math.random()-.5)*.22, vy: (Math.random()-.5)*.22, hue: i % 3 })); }
+      function field() { ctx.clearRect(0,0,innerWidth,innerHeight); points.forEach(p => { p.x += p.vx; p.y += p.vy; if (p.x < 0 || p.x > innerWidth) p.vx *= -1; if (p.y < 0 || p.y > innerHeight) p.vy *= -1; }); for (let i=0;i<points.length;i++) for (let j=i+1;j<points.length;j++) { const a=points[i], b=points[j], dx=a.x-b.x, dy=a.y-b.y, d=Math.hypot(dx,dy); if (d<135) { ctx.strokeStyle = `rgba(${a.hue===0?'215,255,95':a.hue===1?'136,220,255':'255,120,90'},${(1-d/135)*.12})`; ctx.lineWidth=1; ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke(); } } points.forEach(p => { ctx.fillStyle = p.hue===0?'rgba(215,255,95,.42)':p.hue===1?'rgba(136,220,255,.35)':'rgba(255,120,90,.32)'; ctx.fillRect(p.x-1,p.y-1,2,2); }); if (!reduceMotion) animation=requestAnimationFrame(field); }
+      setupField(); field(); window.addEventListener('resize', setupField);
+    </script>
+  </body>
+</html>
